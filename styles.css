@@ -121,6 +121,8 @@ p {
 }
 
 .timer-bg {
+  background: blue;
+  padding: 35px 45px;
 }
 /* Custom Styling */
 .flex {
