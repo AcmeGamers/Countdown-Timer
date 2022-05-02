@@ -18,6 +18,45 @@ body {
   overflow: hidden;
 }
 
+/* .testing {
+  background: white;
+  color: black;
+  padding: 30px;
+  height: 500px;
+  font-size: 30px;
+}
+.testing div:nth-child(1) {
+  background: yellow;
+}
+.testing div:nth-child(2) {
+  background: blue;
+  transform: scaleY(-1);
+  position: relative;
+  top: -40px;
+  animation: animate 1.5s infinite;
+  z-index: 1;
+}
+.flipped {
+  transform: scaleY(-1);
+}
+.testing div:nth-child(3) {
+  position: relative;
+  background: green;
+  transform: translateY(-40px);
+  z-index: 0;
+} 
+
+@keyframes animate {
+  0% {
+    transform: scaleY(-1);
+  }
+  100% {
+    transform: scaleY(1);
+    top: 0px;
+  }
+}
+*/
+
 /* The Elements */
 h1 {
   color: var(--bold-color);
@@ -67,6 +106,20 @@ p {
   font-size: 13px;
 }
 
+.time {
+  margin: 0 30px;
+}
+
+.icons {
+  position: absolute;
+  left: 45vw;
+  bottom: 5vh;
+}
+
+.icons img {
+  margin: 10px;
+}
+
 /* Custom Styling */
 .flex {
   display: flex;
@@ -97,12 +150,20 @@ p {
   justify-content: space-around;
 }
 
+.space-between {
+  justify-content: space-between;
+}
+
 .full-width-element {
   width: -webkit-fill-available;
 }
 
-.capital-case {
-  text-transform: capitalize;
+.uppercase {
+  text-transform: uppercase;
+}
+
+.center-text {
+  text-align: center;
 }
 
 @media screen and (max-width: 425px) {
