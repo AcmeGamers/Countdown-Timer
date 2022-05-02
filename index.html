@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- displays site properly based on user's device -->
 
     <link
       rel="icon"
@@ -13,47 +12,15 @@
     />
 
     <title>Frontend Mentor | Launch countdown timer</title>
+
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <main class="column screen-height space-between">
-      <h1 class="uppercase center-text">We're launching soon</h1>
-
-      <div class="row vr-center hr-center">
-        <div class="time">
-          <h2 class="uppercase center-text">
-            <span class="countdown-number">0</span>
-          </h2>
-          Days
-        </div>
-        <div class="time">
-          <h2 class="uppercase center-text">
-            <span class="countdown-number">0</span>
-          </h2>
-          Hours
-        </div>
-        <div class="time">
-          <h2 class="uppercase center-text">
-            <span class="countdown-number">0</span>
-          </h2>
-          Minutes
-        </div>
-        <div class="time">
-          <h2 class="uppercase center-text">
-            <span class="countdown-number">0</span>
-          </h2>
-          Seconds
-        </div>
-      </div>
-      <div class="column hills">
-        <img src="./images/pattern-hills.svg" alt="" />
-        <div class="icons">
-          <img src="./images/icon-facebook.svg" alt="" />
-          <img src="./images/icon-instagram.svg" alt="" />
-          <img src="./images/icon-pinterest.svg" alt="" />
-        </div>
-      </div>
-    </main>
+    <div id="countdown"></div>
     <!-- <div class="testing">
       <div class="top-timer flip">5</div>
       <div class="middle-timer flip">
@@ -61,5 +28,88 @@
       </div>
       <div class="bottom-timer flip">5</div>
     </div> -->
+
+    <script type="text/babel">
+      class CountDown extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            days: 0,
+            hours: 0,
+            minutes: 0,
+            seconds: 0,
+          };
+        }
+
+        componentDidMount() {
+          var x = setInterval(() => {
+            var now = new Date().getTime(),
+              distance = new Date("July 9, 2022").getTime() - now,
+              days = Math.floor(distance / (1000 * 60 * 60 * 24)),
+              hours = Math.floor(
+                (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+              ),
+              minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
+              seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            this.setState({
+              days,
+              hours,
+              minutes,
+              seconds,
+            });
+          }, 1000);
+        }
+
+        render() {
+          return (
+            <main className="column screen-height space-between">
+              <h1 className="uppercase center-text">We're launching soon</h1>
+
+              <div className="row vr-center hr-center center-text">
+                <div className="time">
+                  <h2 className="days timer-bg">
+                    <span className="countdown-number">{this.state.days}</span>
+                  </h2>
+                  Days
+                </div>
+                <div className="time">
+                  <h2 className="hours timer-bg">
+                    <span className="countdown-number">{this.state.hours}</span>
+                  </h2>
+                  Hours
+                </div>
+                <div className="time">
+                  <h2 className="minutes timer-bg">
+                    <span className="countdown-number">
+                      {this.state.minutes}
+                    </span>
+                  </h2>
+                  Minutes
+                </div>
+                <div className="time">
+                  <h2 className="seconds timer-bg">
+                    <span className="countdown-number">
+                      {this.state.seconds}
+                    </span>
+                  </h2>
+                  Seconds
+                </div>
+              </div>
+              <div className="column hills">
+                <img src="./images/pattern-hills.svg" alt="" />
+                <div className="icons">
+                  <img src="./images/icon-facebook.svg" alt="" />
+                  <img src="./images/icon-instagram.svg" alt="" />
+                  <img src="./images/icon-pinterest.svg" alt="" />
+                </div>
+              </div>
+            </main>
+          );
+        }
+      }
+
+      ReactDOM.render(<CountDown />, document.getElementById("countdown"));
+    </script>
   </body>
 </html>
