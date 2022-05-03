@@ -38,32 +38,33 @@
             hours: 0,
             minutes: 0,
             seconds: 0,
+            launchDate: new Date("July 1, 2025 00:00:00").getTime(),
           };
         }
 
         componentDidMount() {
           var x = setInterval(() => {
-            // Two Digit Converter
-            var twoDigits = (n) => (n < 10 ? "0" + n : n),
-              // Gets 7 days ahead of time
-              date = new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000),
-              // Initiating variables
-              days = date.getDate(),
-              hours = date.getHours(),
-              minutes = date.getMinutes(),
-              seconds = date.getSeconds();
+            function pad(s) {
+              return (s < 10 ? "0" : "") + s;
+            }
 
-            // formatting time
-            days = twoDigits(days);
-            hours = twoDigits(hours);
-            minutes = twoDigits(minutes);
-            seconds = twoDigits(seconds);
+            var now = new Date().getTime();
+            var distance = this.state.launchDate - now;
+
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor(
+              (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+            );
+            var minutes = Math.floor(
+              (distance % (1000 * 60 * 60)) / (1000 * 60)
+            );
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
             this.setState({
-              days: days,
-              hours: hours,
-              minutes: minutes,
-              seconds: seconds,
+              days: pad(days),
+              hours: pad(hours),
+              minutes: pad(minutes),
+              seconds: pad(seconds),
             });
           }, 1000);
         }
